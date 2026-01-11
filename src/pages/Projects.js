@@ -4,12 +4,17 @@ import ProjectCard from '../components/ProjectCard';
 import projects from '../data/projects';
 
 const Projects = () => (
-  <section id="projects" className="py-5" style={{background: '#121212', color:'#fff'}}>
+  <section id="projects">
     <Container>
-      <h2 className="text-center mb-4" data-aos="fade-up">Projects</h2>
-      <Row>
+      <div className="text-center mb-4" data-aos="fade-up">
+        <p className="section-title mb-1">Things I&apos;ve built</p>
+        <h2 className="section-heading">
+          <span>Featured Projects</span>
+        </h2>
+      </div>
+      <Row className="gy-4">
         {projects.map((proj, idx) => (
-          <Col md={4} key={idx} data-aos="zoom-in" className="mb-4">
+          <Col md={6} lg={4} key={idx} data-aos="zoom-in-up">
             <ProjectCard project={proj} />
           </Col>
         ))}

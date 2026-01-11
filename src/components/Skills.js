@@ -2,23 +2,37 @@ import React from 'react';
 import { Container, ProgressBar } from 'react-bootstrap';
 
 const skills = [
-  { name: 'Java', value: 90 },
-  { name: 'DSA', value: 85 },
-  { name: 'OOP', value: 80 },
   { name: 'Python', value: 75 },
   { name: 'SQL', value: 70 },
+  { name: 'Cloud & DevOps', value: 65 },
 ];
 
 const Skills = () => (
-  <Container id="skills" className="py-5">
-    <h2 className="text-center mb-4" data-aos="fade-up">Skills</h2>
-    {skills.map((skill, i) => (
-      <div key={i} data-aos="fade-right" className="mb-3">
-        <h5>{skill.name}</h5>
-        <ProgressBar now={skill.value} label={`${skill.value}%`} animated striped />
+  <section id="skills">
+    <Container>
+      <div className="text-center mb-4" data-aos="fade-up">
+        <p className="section-title mb-1">Skills</p>
+        <h2 className="section-heading">
+          <span>Tech stack</span>
+        </h2>
       </div>
-    ))}
-  </Container>
+      {skills.map((skill, i) => (
+        <div key={i} data-aos="fade-right" className="mb-3">
+          <div className="d-flex justify-content-between mb-1">
+            <span className="fw-semibold">{skill.name}</span>
+            <span className="text-muted">{skill.value}%</span>
+          </div>
+          <ProgressBar
+            now={skill.value}
+            label={`${skill.value}%`}
+            animated
+            striped
+            variant="warning"
+          />
+        </div>
+      ))}
+    </Container>
+  </section>
 );
 
 export default Skills;

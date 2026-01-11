@@ -1,9 +1,15 @@
-export default function Footer() {
-  return (
-    <footer className="bg-dark text-white text-center py-4 mt-5">
-      <p className="mb-0">
-        © 2026 Sanjay • Built with React & Bootstrap
-      </p>
-    </footer>
-  );
-}
+import React from 'react';
+import { Container } from 'react-bootstrap';
+
+const Footer = () => (
+  <footer className="py-3 mt-4">
+    <Container className="text-center">
+      <small style={{ color: 'var(--subtle-text)' }}>
+        © {new Date().getFullYear()} Sanjay Sri Thanu Malaiyaan C · Built with
+        React & Bootstrap
+      </small>
+    </Container>
+  </footer>
+);
+
+export default Footer;

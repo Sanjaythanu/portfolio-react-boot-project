@@ -2,28 +2,45 @@ import React from 'react';
 import { Container, Row, Col, ProgressBar } from 'react-bootstrap';
 
 const skills = [
-  { name: 'Java', value: 85 },
-  { name: 'React', value: 80 },
-  { name: 'JavaScript', value: 75 },
+  { name: 'Java', value: 90 },
+  { name: 'React', value: 85 },
+  { name: 'JavaScript', value: 80 },
   { name: 'DSA', value: 90 },
 ];
 
 const About = () => (
-  <section id="about" className="py-5" style={{background: '#1e1e2f', color:'#fff'}}>
+  <section id="about">
     <Container>
-      <h2 className="text-center mb-4" data-aos="fade-up">About Me</h2>
-      <Row className="mb-4">
+      <Row className="align-items-center gy-4">
         <Col md={6} data-aos="fade-right">
-          <p>
-            I'm an Electronics & Communication Engineering student passionate about coding, software development,
-            and building interactive web applications. Strong expertise in Java, React, and problem-solving.
+          <p className="section-title mb-1">About</p>
+          <h2 className="section-heading">
+            <span>Who am I?</span>
+          </h2>
+          <p style={{ color: 'var(--subtle-text)' }} className="mt-3">
+            Electronics & Communication Engineering student with strong focus on
+            modern web technologies, clean code, and scalable architecture.
+          </p>
+          <p style={{ color: 'var(--subtle-text)' }}>
+            Enjoy solving complex problems, contributing to full stack
+            applications, and exploring AI-driven solutions that create real
+            impact.
           </p>
         </Col>
+
         <Col md={6} data-aos="fade-left">
           {skills.map((skill, idx) => (
             <div key={idx} className="mb-3">
-              <h5>{skill.name}</h5>
-              <ProgressBar now={skill.value} label={`${skill.value}%`} animated striped />
+              <div className="d-flex justify-content-between mb-1">
+                <span className="fw-semibold">{skill.name}</span>
+                <span className="text-muted">{skill.value}%</span>
+              </div>
+              <ProgressBar
+                now={skill.value}
+                animated
+                striped
+                variant="warning"
+              />
             </div>
           ))}
         </Col>

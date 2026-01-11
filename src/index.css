@@ -1,13 +1,41 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Light theme */
+:root {
+  --bg-color: #f3f4f6;
+  --bg-elevated: rgba(255, 255, 255, 0.9);
+  --text-color: #111827;
+  --subtle-text: #6b7280;
+  --accent: #fbbf24;
+  --accent-soft: rgba(251, 191, 36, 0.25);
+  --border-radius-lg: 1.25rem;
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.15);
+}
+
+/* Dark theme */
+:root[data-theme='dark'] {
+  --bg-color: #050816;
+  --bg-elevated: rgba(15, 23, 42, 0.92);
+  --text-color: #e5e7eb;
+  --subtle-text: #9ca3af;
+  --accent: #facc15;
+  --accent-soft: rgba(250, 204, 21, 0.2);
+  --border-radius-lg: 1.25rem;
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
