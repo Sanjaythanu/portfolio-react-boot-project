@@ -1,60 +1,28 @@
-import React from 'react';
-import { Card, Badge } from 'react-bootstrap';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import React from "react";
+import { Card, Button, Badge } from "react-bootstrap"; // you must import these
 
-const ProjectCard = ({ project }) => (
-  <Card
-    className="h-100 glass-panel hover-lift"
-    style={{ cursor: 'pointer' }}
-  >
-    <Card.Body>
-      <Card.Title className="mb-2">{project.title}</Card.Title>
-      <Card.Text className="mb-3" style={{ color: 'var(--subtle-text)' }}>
-        {project.description}
-      </Card.Text>
+export default function ProjectCard({ project }) {
+  return (
+    <Card className="glass h-100 hover-lift" data-aos="fade-up">
+      <Card.Body>
+        <Card.Title>{project.title}</Card.Title>
+        <Card.Text>{project.description}</Card.Text>
 
-      {project.tags && (
-        <div className="d-flex flex-wrap gap-2 mb-2">
-          {project.tags.map((tag) => (
-            <Badge
-              key={tag}
-              bg=""
-              style={{
-                backgroundColor: 'var(--accent-soft)',
-                fontSize: '0.75rem',
-              }}
-            >
-              {tag}
+        <div className="mb-3">
+          {project.tags.map((t) => (
+            <Badge key={t} bg="" className="me-1 glass">
+              {t}
             </Badge>
           ))}
         </div>
-      )}
-    </Card.Body>
 
-    <Card.Footer className="border-0 bg-transparent d-flex justify-content-between align-items-center">
-      <small style={{ color: 'var(--subtle-text)' }}>{project.stack}</small>
-      <div className="d-flex gap-3">
-        <a
-          href={project.github || '#'}
-          target="_blank"
-          rel="noreferrer"
-          className="text-reset"
-        >
-          <FaGithub />
-        </a>
-        {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            className="text-reset"
-          >
-            <FaExternalLinkAlt />
-          </a>
-        )}
-      </div>
-    </Card.Footer>
-  </Card>
-);
-
-export default ProjectCard;
+        <Button size="sm" className="btn-glow me-2" href={project.github} target="_blank">
+          GitHub
+        </Button>
+        <Button size="sm" variant="outline-secondary" href={project.link} target="_blank">
+          Live
+        </Button>
+      </Card.Body>
+    </Card>
+  );
+}

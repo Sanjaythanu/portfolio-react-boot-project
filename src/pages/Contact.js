@@ -1,75 +1,137 @@
-import React from 'react';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import React, { useRef, useState } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import emailjs from "@emailjs/browser";
 
-const Contact = () => (
-  <section id="contact">
-    <Container>
-      <div className="text-center mb-4" data-aos="fade-up">
-        <p className="section-title mb-1">Contact</p>
-        <h2 className="section-heading">
-          <span>Let&apos;s connect</span>
-        </h2>
-        <p style={{ color: 'var(--subtle-text)' }}>
-          Open to internships, freelance projects, and collaborations.
-        </p>
-      </div>
+const Contact = () => {
+  const formRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
 
-      <Row className="gy-4 justify-content-center">
-        <Col md={8} lg={6}>
-          <div className="glass-panel p-4" data-aos="fade-up">
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Your name" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="you@example.com" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Message</Form.Label>
-                <Form.Control as="textarea" rows={4} />
-              </Form.Group>
-              <Button variant="warning" type="submit" className="btn-pill w-100">
-                Send Message
-              </Button>
-            </Form>
-          </div>
-        </Col>
-      </Row>
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-      <div
-        className="text-center mt-4 d-flex justify-content-center gap-4"
-        data-aos="zoom-in"
-      >
-        <a
-          href="https://github.com/Sanjaythanu"
-          target="_blank"
-          rel="noreferrer"
-          className="text-reset hover-lift"
-        >
-          <FaGithub size={30} />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/sanjay-sri-thanu-malaiyaan-c-9ab237330/"
-          target="_blank"
-          rel="noreferrer"
-          className="text-reset hover-lift"
-        >
-          <FaLinkedin size={30} />
-        </a>
-        <a
-          href="mailto:sanjaychittu2005@gmail.com"
-          target="_blank"
-          rel="noreferrer"
-          className="text-reset hover-lift"
-        >
-          <FaEnvelope size={30} />
-        </a>
-      </div>
-    </Container>
-  </section>
-);
+    emailjs
+      .sendForm(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        formRef.current,
+        "YOUR_PUBLIC_KEY"
+      )
+      .then(
+        () => {
+          setLoading(false);
+          setSent(true);
+          formRef.current.reset();
+        },
+        (error) => {
+          setLoading(false);
+          alert("Something went wrong 😭");
+          console.error(error);
+        }
+      );
+  };
+
+  return (
+    <section id="contact" className="py-5 contact">
+      <Container>
+        <div className="text-center mb-5">
+          <p className="section-title mb-1">Contact</p>
+          <h2 className="section-heading">
+            <span>Let’s build something amazing</span>
+          </h2>
+        </div>
+
+        <Row className="g-4 align-items-center">
+          {/* LEFT */}
+          <Col lg={5}>
+            <div className="glass-panel p-4 rounded-4 hover-lift">
+              <h4 className="mb-3">Let’s work together 🚀</h4>
+              <p style={{ color: "var(--subtle)" }}>
+                Got a project, startup idea, or want to collab? Drop a message.
+              </p>
+
+              <div className="mt-4 d-flex flex-column gap-3">
+                <div className="d-flex gap-3">
+                  <i className="fas fa-envelope text-warning fs-5" />
+                  <span>sanjaychittu2005@gmail.com</span>
+                </div>
+                <div className="d-flex gap-3">
+                  <i className="fas fa-map-marker-alt text-warning fs-5" />
+                  <span>Coimbatore, India</span>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          {/* RIGHT */}
+          <Col lg={7}>
+            <div className="glass-panel p-4 rounded-4 hover-lift">
+              <Form ref={formRef} onSubmit={sendEmail}>
+                <Row className="g-3">
+                  <Col md={6}>
+                    <Form.Control
+                      type="text"
+                      name="user_name"
+                      placeholder="Your Name"
+                      className="glass-input"
+                      required
+                    />
+                  </Col>
+
+                  <Col md={6}>
+                    <Form.Control
+                      type="email"
+                      name="user_email"
+                      placeholder="Your Email"
+                      className="glass-input"
+                      required
+                    />
+                  </Col>
+
+                  <Col md={12}>
+                    <Form.Control
+                      type="text"
+                      name="subject"
+                      placeholder="Subject"
+                      className="glass-input"
+                      required
+                    />
+                  </Col>
+
+                  <Col md={12}>
+                    <Form.Control
+                      as="textarea"
+                      name="message"
+                      rows={5}
+                      placeholder="Your Message"
+                      className="glass-input"
+                      required
+                    />
+                  </Col>
+                </Row>
+
+                <Button
+                  type="submit"
+                  variant="warning"
+                  className="mt-4 px-4 py-2 rounded-pill"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "🚀 Send Message"}
+                </Button>
+
+                {sent && (
+                  <p className="mt-3 text-success">
+                    ✅ Message sent successfully!
+                  </p>
+                )}
+              </Form>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+  );
+};
 
 export default Contact;

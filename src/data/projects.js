@@ -1,21 +1,21 @@
 const projects = [
   {
-    title: 'Portfolio Website',
+    title: "Portfolio Website",
     description:
-      'Responsive personal portfolio built using React, React-Bootstrap, and animated sections.',
-    github: 'https://github.com/Sanjaythanu/Portfolio',
-    link: '#',
-    stack: 'React • Bootstrap • AOS',
-    tags: ['React', 'Bootstrap', 'AOS'],
+      "Modern personal portfolio with glass UI, smooth animations, dark/light mode, and responsive design.",
+    github: "https://github.com/Sanjaythanu/Portfolio",
+    link: "#",
+    stack: "React • Bootstrap • AOS",
+    tags: ["React", "Bootstrap", "UI/UX"],
   },
   {
-    title: 'Document Forgery Detection System',
+    title: "Document Forgery Detection",
     description:
-      'Java Swing application to detect forged documents with database support.',
-    github: '#',
-    link: '#',
-    stack: 'Java • Swing • MySQL',
-    tags: ['Java', 'Swing', 'SQL'],
+      "Java desktop application to detect forged documents using OOP, JDBC, and MySQL.",
+    github: "#",
+    link: "#",
+    stack: "Java • Swing • MySQL",
+    tags: ["Java", "SQL", "Security"],
   },
 ];
 

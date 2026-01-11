@@ -1,15 +1,9 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
-
-const Footer = () => (
-  <footer className="py-3 mt-4">
-    <Container className="text-center">
-      <small style={{ color: 'var(--subtle-text)' }}>
-        © {new Date().getFullYear()} Sanjay Sri Thanu Malaiyaan C · Built with
-        React & Bootstrap
-      </small>
-    </Container>
-  </footer>
-);
-
-export default Footer;
+export default function Footer() {
+  return (
+    <footer className="py-4 text-center glass">
+      <p className="mb-0">
+        © {new Date().getFullYear()} Sanjay • Built with React & Bootstrap
+      </p>
+    </footer>
+  );
+}

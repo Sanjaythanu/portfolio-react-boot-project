@@ -1,0 +1,130 @@
+.hero-section {
+  background: var(--hero-bg);
+  transition: all 0.5s ease;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+/* Accent text gradient */
+.accent-text {
+  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Typing effect */
+.hero-subtitle {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  min-height: 2.2rem;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 0.7s infinite;
+  color: var(--accent2);
+}
+
+@keyframes blink {
+  0%,50%,100% { opacity: 1; }
+  25%,75% { opacity: 0; }
+}
+
+/* Buttons hover animation */
+.hover-lift {
+  transition: all 0.35s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+/* Glow buttons */
+.btn-glow {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(99,102,241,0.4);
+}
+
+.btn-outline-glow {
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: 0.75rem 1.6rem;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn-outline-glow:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(99,102,241,0.4);
+}
+
+/* Description fade-in */
+.hero-description {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+  animation-delay: 0.5s;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Floating tech icons */
+.floating-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.floating-icons .icon {
+  position: absolute;
+  font-size: 2.5rem;
+  opacity: 0.15;
+  animation: float 6s ease-in-out infinite;
+  color: var(--accent2);
+}
+
+.icon.react { top: 20%; left: 15%; animation-delay: 0s; }
+.icon.java { top: 40%; left: 80%; animation-delay: 1.5s; }
+.icon.js { top: 65%; left: 25%; animation-delay: 3s; }
+.icon.bootstrap { top: 30%; left: 55%; animation-delay: 4.5s; }
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Theme safe colors */
+body[data-theme="light"] {
+  --hero-bg: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+body[data-theme="dark"] {
+  --hero-bg: linear-gradient(135deg, #4b0082, #00008b);
+}
+
+/* Make hero responsive */
+@media(max-width: 768px) {
+  .hero-subtitle { font-size: 1.4rem; }
+  .btn-glow, .btn-outline-glow { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+  .floating-icons .icon { font-size: 2rem; }
+}

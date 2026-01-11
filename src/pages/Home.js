@@ -1,158 +1,120 @@
-import React from 'react';
-import { Container, Button, Row, Col, Badge } from 'react-bootstrap';
-import { FaDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
-import heroImage from '../assets/hero.png';
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { FaReact, FaJava, FaJs, FaBootstrap } from "react-icons/fa";
+import "./Home.css"; // Home CSS for animations
 
-const Home = () => {
-  const particlesInit = async (main) => {
-    await loadFull(main);
-  };
+const words = [
+  "Full Stack Developer",
+  "React Enthusiast",
+  "Java Lover",
+  "UI/UX Designer",
+  "Problem Solver",
+];
+
+export default function Home() {
+  const [currentWord, setCurrentWord] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  // Typing effect for hero subtitle
+  useEffect(() => {
+    const typingSpeed = deleting ? 50 : 150;
+    const timeout = setTimeout(() => {
+      let fullWord = words[wordIndex];
+      if (!deleting) {
+        setCurrentWord(fullWord.slice(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+        if (charIndex + 1 === fullWord.length) setDeleting(true);
+      } else {
+        setCurrentWord(fullWord.slice(0, charIndex - 1));
+        setCharIndex(charIndex - 1);
+        if (charIndex - 1 === 0) {
+          setDeleting(false);
+          setWordIndex((wordIndex + 1) % words.length);
+        }
+      }
+    }, typingSpeed);
+    return () => clearTimeout(timeout);
+  }, [charIndex, deleting, wordIndex]);
 
   return (
-    <section id="home" style={{ position: 'relative', minHeight: '100vh' }}>
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fpsLimit: 60,
-          fullScreen: { enable: false },
-          style: { position: 'absolute', inset: 0 },
-          particles: {
-            number: { value: 45, density: { enable: true, area: 900 } },
-            color: { value: ['#ffffff', '#facc15', '#38bdf8'] },
-            links: {
-              enable: true,
-              distance: 140,
-              color: '#64748b',
-              opacity: 0.4,
-              width: 1,
-            },
-            move: {
-              enable: true,
-              speed: 1.2,
-              outModes: 'bounce',
-            },
-            opacity: { value: 0.5 },
-            size: { value: { min: 1, max: 4 } },
-          },
-          interactivity: {
-            events: {
-              onHover: { enable: true, mode: 'repulse' },
-              onClick: { enable: true, mode: 'push' },
-            },
-            modes: {
-              repulse: { distance: 120 },
-              push: { quantity: 2 },
-            },
-          },
-        }}
-      />
+    <section
+      id="home"
+      className="d-flex align-items-center hero-section"
+      style={{ minHeight: "100vh", position: "relative" }}
+    >
+      {/* Floating tech icons */}
+      <div className="floating-icons">
+        <FaReact className="icon react" />
+        <FaJava className="icon java" />
+        <FaJs className="icon js" />
+        <FaBootstrap className="icon bootstrap" />
+      </div>
 
-      <Container
-        className="d-flex align-items-center"
-        style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}
-      >
-        <Row className="w-100 gy-4 align-items-center">
-          <Col
-            lg={7}
-            data-aos="fade-right"
-            data-aos-delay="150"
-            className="text-center text-lg-start"
-          >
-            <p className="section-title mb-1">Welcome to my space</p>
-            <h1 className="fw-bold display-5 mb-2">
-              Hello, <span style={{ color: 'var(--accent)' }}>I'm Sanjay</span>
-            </h1>
-            <p className="lead mb-3" style={{ color: 'var(--subtle-text)' }}>
-              Full Stack Developer, AI Enthusiast, and Cloud Innovator crafting
-              performant and delightful web experiences.
-            </p>
+      <Container className="text-center">
+        <h1 className="display-4 fw-bold hero-title" data-aos="fade-up">
+          Hey, I'm <span className="accent-text">Sanjay</span>
+        </h1>
 
-            <div className="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start mb-3">
-              <Badge bg="" style={{ backgroundColor: 'var(--accent-soft)' }}>
-                Java & React
-              </Badge>
-              <Badge bg="" style={{ backgroundColor: 'var(--accent-soft)' }}>
-                Problem Solving
-              </Badge>
-              <Badge bg="" style={{ backgroundColor: 'var(--accent-soft)' }}>
-                Cloud & APIs
-              </Badge>
-            </div>
+        <h2
+          className="mt-3 hero-subtitle"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <span className="typed-word">{currentWord}</span>
+          <span className="cursor">|</span>
+        </h2>
 
-            <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-              <Button
-                href="/resume.pdf"
-                download
-                variant="warning"
-                className="btn-pill hover-lift"
-              >
-                <FaDownload className="me-2" />
-                Download Resume
-              </Button>
+        <p
+          className="lead mt-3 hero-description"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
+          Building modern web apps with React, Java & Bootstrap • UI/UX Designer
+        </p>
 
-              <div className="d-flex align-items-center gap-3">
-                <a
-                  href="https://github.com/Sanjaythanu"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-decoration-none text-reset hover-lift"
-                >
-                  <FaGithub size={26} />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/sanjay-sri-thanu-malaiyaan-c-9ab237330/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-decoration-none text-reset hover-lift"
-                >
-                  <FaLinkedin size={26} color="#0A66C2" />
-                </a>
-              </div>
-            </div>
-          </Col>
+        {/* Expanded Portfolio History */}
+        <div
+          className="hero-history mt-5 text-start mx-auto"
+          style={{ maxWidth: "700px" }}
+        >
+          <h4 data-aos="fade-up" data-aos-delay="600">💻 My Journey</h4>
+          <ul>
+            <li data-aos="fade-up" data-aos-delay="700">
+              Started coding in Java at 16, building desktop applications.
+            </li>
+            <li data-aos="fade-up" data-aos-delay="800">
+              Explored Web Development with HTML, CSS, JS, and Bootstrap.
+            </li>
+            <li data-aos="fade-up" data-aos-delay="900">
+              Learned React for dynamic, responsive single-page applications.
+            </li>
+            <li data-aos="fade-up" data-aos-delay="1000">
+              Built projects including Portfolio Website & Document Forgery Detector.
+            </li>
+            <li data-aos="fade-up" data-aos-delay="1100">
+              Achieved certifications in Java, Data Structures & Algorithms.
+            </li>
+            <li data-aos="fade-up" data-aos-delay="1200">
+              Passionate about creating beautiful UIs and scalable backend systems.
+            </li>
+          </ul>
+        </div>
 
-          <Col
-            lg={5}
-            className="d-flex justify-content-center"
-            data-aos="fade-left"
-            data-aos-delay="250"
-          >
-            <div className="position-relative">
-              <div
-                className="position-absolute rounded-circle"
-                style={{
-                  inset: '-10%',
-                  background:
-                    'radial-gradient(circle, var(--accent-soft), transparent 60%)',
-                  filter: 'blur(4px)',
-                }}
-              />
-              <img
-                src={heroImage}
-                alt="Sanjay"
-                className="img-fluid rounded-circle shadow-lg"
-                style={{
-                  maxWidth: '280px',
-                  border: '4px solid var(--accent)',
-                  transform: 'translateY(0)',
-                  transition: 'transform 0.35s ease',
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = 'translateY(-8px)')
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = 'translateY(0)')
-                }
-              />
-            </div>
-          </Col>
-        </Row>
+        <div
+          className="mt-4 hero-buttons"
+          data-aos="fade-up"
+          data-aos-delay="1400"
+        >
+          <a href="#projects" className="btn-glow hover-lift me-3">
+            View Projects
+          </a>
+          <a href="#contact" className="btn-outline-glow hover-lift">
+            Contact Me
+          </a>
+        </div>
       </Container>
     </section>
   );
-};
-
-export default Home;
+}

@@ -1,42 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import './App.css';
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
+import Contact from "./pages/Contact";
+import Certifications from "./components/Certifications";
+import Skills from "./components/Skills";
 
 function App() {
-  const prefersDark =
-    window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  const [darkMode, setDarkMode] = useState(
-    () => JSON.parse(localStorage.getItem('darkMode')) ?? prefersDark
-  );
+  const [dark, setDark] = useState(true);
 
   useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-theme',
-      darkMode ? 'dark' : 'light'
-    );
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
-
-  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  }, [dark]);
 
   return (
-    <div className="app-root">
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main>
-        <Home />
-        <About />
-        <Projects />
-        <Contact />
-      </main>
+    <>
+      <Navbar toggleTheme={() => setDark(!dark)} />
+      <Home />
+      <About />
+      <Skills/>
+      <Certifications />
+      <Projects />
+      <Contact />
       <Footer />
-    </div>
+    </>
   );
 }
 

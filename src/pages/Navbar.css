@@ -1,0 +1,40 @@
+.navbar-glass {
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.15); /* lighter for dark/light adaptation */
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.navbar-glass .nav-link {
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-glass .nav-link:hover {
+  color: var(--accent2);
+  transform: translateY(-2px);
+}
+
+.navbar-glass .btn-theme {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-glass .btn-theme:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.navbar-collapse {
+  transition: max-height 0.5s ease;
+}
+
+/* Mobile Menu Animation */
+.navbar-collapse.collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.navbar-collapse.collapse.show {
+  max-height: 500px; /* adjust as needed */
+}

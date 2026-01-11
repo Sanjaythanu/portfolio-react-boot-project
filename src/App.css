@@ -84,3 +84,25 @@ button {
   background: var(--hero-bg);
   transition: all 0.5s ease;
 }
+/* Hover animation */
+.hover-lift {
+  transition: all 0.35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+/* Skill badges */
+.skill-item {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.skill-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(99,102,241,0.6);
+}
